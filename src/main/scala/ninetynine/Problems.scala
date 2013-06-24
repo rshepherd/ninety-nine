@@ -9,7 +9,7 @@ object Problems {
   def last[A](list: List[A]) = list.last
 
   // P02 (*) Find the last but one element of a list.
-  def penultimate[A](list: List[A]) = list.dropRight(1).last
+  def penultimate[A](list: List[A]) = list.init.last
 
   // P03 (*) Find the Kth element of a list.
   def nth[A](i: Int, list: List[A]) = list.drop(i).head
@@ -18,7 +18,7 @@ object Problems {
   def len[A](list: List[A]) = list.foldLeft(0) { (a, _) => a + 1 }
 
   // P05 (*) Reverse a list.
-  def rev[A](list: List[A]) = list.foldLeft(List[A]()) { (list, h) => h :: list }
+  def rev[A](list: List[A]) = list.foldLeft(List[A]()) { (l, a) => a :: l }
 
   // P06 (*) Find out whether a list is a palindrome.
   def palindrome[A](list: List[A]) = {
@@ -37,9 +37,15 @@ object Problems {
   }
 
   // P08 (**) Eliminate consecutive duplicates of list elements.
-  def compress[A](list: List[A]) = list.foldLeft(List[A]()) { (l, e) =>
-    if (l.isEmpty || l.head != e) e :: l  else l
+  def compress[A](list: List[A]) = list.foldLeft(List[A]()) { (l, a) =>
+    if (l.isEmpty || l.head != a) a :: l  else l
   }.reverse
+
+  // P09 (**) Pack consecutive duplicates of list elements into sub-lists.
+  def pack[A](list: List[A]) : List[List[A]]= Nil
+
+  // P10 (*) Run-length encoding of a list.
+  def encode[A](list: List[A]) : List[(Int, Symbol)] = Nil
 
 }
 
