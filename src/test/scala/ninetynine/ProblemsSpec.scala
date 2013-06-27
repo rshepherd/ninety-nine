@@ -48,7 +48,7 @@ class ProblemsSpec extends Specification {
 
     "get the run-length encoding of a list. (P10)" in {
       encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must_==
-        List[(Int, Symbol)] = List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
+        List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
 
     }
   }
