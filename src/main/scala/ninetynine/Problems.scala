@@ -51,6 +51,31 @@ object Problems {
     }.reverse
   }
 
+  // P11 (*) Modified run-length encoding.
+  def encodeModified[A](list: List[A]): List[Any] = {
+    encode(list).foldLeft(List[Any]()) {
+      (l, t) => if(t._1 == 1) t._2 :: l else t :: l
+    }.reverse
+  }
+
+  // P12 (**) Decode a run-length encoded list.
+  def decode[A](list: List[(Int, A)]) = {
+    list.flatMap { t => 1 to t._1 map { _ => t._2 } }
+  }
+
+  // P13 (**) Run-length encoding of a list (direct solution).
+  def encodeDirect[A](list: List[A]): List[(Int, A)] = encode(list) // TODO
+
+  // P14 (*) Duplicate the elements of a list.
+  def duplicate[A](list: List[A], n: Int = 2) = list.flatMap { List.fill(n)(_) }
+
+  // P15 (**) Duplicate the elements of a list a given number of times.
+  def duplicateN[A](list: List[A], n: Int) = duplicate(list, n)
+
+  // P16 (**) Drop every Nth element from a list.
+  def drop[A](n: Int, list: List[A]) = {
+    list.zipWithIndex.filter(t => (t._2 + 1) % n != 0).map(_._1)
+  }
 
 }
 

@@ -49,8 +49,38 @@ class ProblemsSpec extends Specification {
     "get the run-length encoding of a list. (P10)" in {
       encode(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must_==
         List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
-
     }
+
+    "get modified run-length encoding. (P11)" in {
+      encodeModified(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must_==
+        List((4,'a), 'b, (2,'c), (2,'a), 'd, (4,'e))
+    }
+
+    "decode a run-length encoded list. (P12)" in {
+      decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e))) must_==
+        List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)
+    }
+
+    "run-length encoding of a list (direct solution). (P13)" in {
+      encodeDirect(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e)) must_==
+        List((4,'a), (1,'b), (2,'c), (2,'a), (1,'d), (4,'e))
+    }
+
+    "duplicate the elements of a list. (P14)" in {
+      duplicate(List('a, 'b, 'c, 'c, 'd)) must_==
+        List('a, 'a, 'b, 'b, 'c, 'c, 'c, 'c, 'd, 'd)
+    }
+
+    "duplicate the elements of a list a given number of times. (P15)" in {
+      duplicateN(List('a, 'b, 'c, 'c, 'd), 3) must_==
+        List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd)
+    }
+
+    "drop every Nth element from a list. (P16)" in {
+      drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+        List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
+    }
+
   }
 
 }
