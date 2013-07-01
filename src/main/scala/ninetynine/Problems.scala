@@ -74,7 +74,21 @@ object Problems {
 
   // P16 (**) Drop every Nth element from a list.
   def drop[A](n: Int, list: List[A]) = {
-    list.zipWithIndex.filter(t => (t._2 + 1) % n != 0).map(_._1)
+    list.zipWithIndex.filter { t => (t._2 + 1) % n != 0 } .map(_._1)
+  }
+
+  // P17 (*) Split a list into two parts. i.e. list.splitAt(i)
+  def split[A](i: Int, list: List[A]) = {
+    list.zipWithIndex.foldLeft((List[A](), List[A]())) { (acc, e) =>
+        if (e._2 < i) (e._1 :: acc._1, acc._2) else (acc._1, e._1 :: acc._2)
+    } match {
+      case (l1, l2) => (l1.reverse, l2.reverse)
+    }
+  }
+
+  // P18 (**) Extract a slice from a list. i.e. list.slice(s, e)
+  def slice[A](s: Int, e: Int, list: List[A]) = {
+    list.zipWithIndex.filter { t => t._2 >= s && t._2 < e }.map(_._1)
   }
 
 }

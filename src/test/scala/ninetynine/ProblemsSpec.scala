@@ -81,6 +81,18 @@ class ProblemsSpec extends Specification {
         List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
     }
 
+    "split a list into two parts. (P17)" in {
+      split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+        (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
+    }
+
+    "extract a slice from a list. (P18) " in {
+      slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+        List('d, 'e, 'f, 'g)
+    }
+
+
+
   }
 
 }
