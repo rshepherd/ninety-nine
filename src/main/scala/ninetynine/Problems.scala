@@ -30,7 +30,7 @@ object Problems {
   // P07 (**) Flatten a nested list structure.
   def flatten(lists: List[Any]) : List[Any] = lists.flatMap {
     case l: List[Any] => flatten(l)
-    case a: Any => List(a)
+    case a: Any => Some(a)
   }
 
   // P08 (**) Eliminate consecutive duplicates of list elements.
@@ -66,11 +66,8 @@ object Problems {
   // P13 (**) Run-length encoding of a list (direct solution).
   def encodeDirect[A](list: List[A]): List[(Int, A)] = encode(list) // TODO
 
-  // P14 (*) Duplicate the elements of a list.
+  // P14 && P15 (**) Duplicate the elements of a list.
   def duplicate[A](list: List[A], n: Int = 2) = list.flatMap { List.fill(n)(_) }
-
-  // P15 (**) Duplicate the elements of a list a given number of times.
-  def duplicateN[A](list: List[A], n: Int) = duplicate(list, n)
 
   // P16 (**) Drop every Nth element from a list.
   def drop[A](n: Int, list: List[A]) = {

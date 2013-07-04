@@ -72,7 +72,7 @@ class ProblemsSpec extends Specification {
     }
 
     "duplicate the elements of a list a given number of times. (P15)" in {
-      duplicateN(List('a, 'b, 'c, 'c, 'd), 3) must_==
+      duplicate(List('a, 'b, 'c, 'c, 'd), 3) must_==
         List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd)
     }
 
