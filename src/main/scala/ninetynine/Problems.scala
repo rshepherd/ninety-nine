@@ -87,12 +87,13 @@ object Problems {
 
   // P19 (**) Rotate a list N places to the left.
   def rotate[A](i: Int, list: List[A]) : List[A]= {
-    list // TODO
+    Nil // TODO
   }
 
   // P20 (*) Remove the Kth element from a list.
   def removeAt[A](i: Int, list: List[A]): (List[A], A) = {
-    (Nil, list.head) // TODO
+    val (h, t) = split(i, list)
+    (h ++ t.drop(1), t.head)
   }
 
   // P21 (*) Insert an element at a given position into a list.

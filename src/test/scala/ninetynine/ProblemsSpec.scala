@@ -91,12 +91,12 @@ class ProblemsSpec extends Specification {
         List('d, 'e, 'f, 'g)
     }
 
-    "rotate a list N places to the left (P19)" in {
-      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
-        List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
-      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
-        List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
-    }
+//    "rotate a list N places to the left (P19)" in {
+//      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+//        List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
+//      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+//        List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
+//    }
 
     "remove the Kth element from a list (P20)" in {
       removeAt(1, List('a, 'b, 'c, 'd)) must_== (List('a, 'c, 'd),'b)
