@@ -45,18 +45,16 @@ object Problems {
   }
 
   // P10 (*) Run-length encoding of a list.
-  def encode[A](list: List[A]): List[(Int, A)] = {
+  def encode[A](list: List[A]): List[(Int, A)] =
     pack(list).foldLeft(List[(Int, A)]()) {
       (ll, l) => (l.size, l.head) :: ll
     }.reverse
-  }
 
   // P11 (*) Modified run-length encoding.
-  def encodeModified[A](list: List[A]): List[Any] = {
+  def encodeModified[A](list: List[A]): List[Any] =
     encode(list).foldLeft(List[Any]()) {
       (l, t) => if(t._1 == 1) t._2 :: l else t :: l
     }.reverse
-  }
 
   // P12 (**) Decode a run-length encoded list.
   def decode[A](list: List[(Int, A)]) = {
@@ -74,26 +72,41 @@ object Problems {
 
   // P16 (**) Drop every Nth element from a list.
   def drop[A](n: Int, list: List[A]) = {
-    list.zipWithIndex.filter { t => (t._2 + 1) % n != 0 } .map(_._1)
+    list.zipWithIndex.filter { t => (t._2 + 1) % n != 0 } map (_._1)
   }
 
   // P17 (*) Split a list into two parts. i.e. list.splitAt(i)
-  def split[A](i: Int, list: List[A]) = {
+  def split[A](i: Int, list: List[A]) =
     list.zipWithIndex.foldLeft((List[A](), List[A]())) { (acc, e) =>
         if (e._2 < i) (e._1 :: acc._1, acc._2) else (acc._1, e._1 :: acc._2)
     } match {
       case (l1, l2) => (l1.reverse, l2.reverse)
     }
-  }
 
   // P18 (**) Extract a slice from a list. i.e. list.slice(s, e)
   def slice[A](s: Int, e: Int, list: List[A]) = {
     list.zipWithIndex.filter { t => t._2 >= s && t._2 < e }.map(_._1)
   }
 
+  // P19 (**) Rotate a list N places to the left.
+  def rotate[A](i: Int, list: List[A]) : List[A]= {
+    list // TODO
+  }
+
+  // P20 (*) Remove the Kth element from a list.
+  def removeAt[A](i: Int, list: List[A]): (List[A], A) = {
+    (Nil, list.head) // TODO
+  }
+
+  // P21 (*) Insert an element at a given position into a list.
+  def insertAt[A](x: A, i: Int, list: List[A]) =
+    list.zipWithIndex.foldLeft(List[A]()) { (acc, e) =>
+      if(e._2 == i) e._1 :: x :: acc else e._1 :: acc
+    }.reverse
+
+  // P22 (*) Create a list containing all integers within a given range.
+  def range(s: Int, e: Int) : List[Int] = {
+    if (s <= e) s :: range(s + 1, e) else Nil
+  }
+
 }
-
-
-
-
-

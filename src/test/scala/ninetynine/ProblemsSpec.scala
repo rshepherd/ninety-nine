@@ -91,7 +91,24 @@ class ProblemsSpec extends Specification {
         List('d, 'e, 'f, 'g)
     }
 
+    "rotate a list N places to the left (P19)" in {
+      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+        List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
+      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+        List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
+    }
 
+    "remove the Kth element from a list (P20)" in {
+      removeAt(1, List('a, 'b, 'c, 'd)) must_== (List('a, 'c, 'd),'b)
+    }
+
+    "insert an element at a given position into a list. (P21)" in {
+      insertAt('new, 1, List('a, 'b, 'c, 'd)) must_== List('a, 'new, 'b, 'c, 'd)
+    }
+
+    "create a list containing all integers within a given range. (P22)" in {
+      range(4, 9) must_== List(4, 5, 6, 7, 8, 9)
+    }
 
   }
 
