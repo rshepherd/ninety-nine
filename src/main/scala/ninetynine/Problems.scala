@@ -1,5 +1,7 @@
 package ninetynine
 
+import scala.util.Random
+
 object Problems {
 
   // P01 (*) Find the last element of a list.
@@ -57,9 +59,7 @@ object Problems {
     }.reverse
 
   // P12 (**) Decode a run-length encoded list.
-  def decode[A](list: List[(Int, A)]) = {
-    list.flatMap { t => 1 to t._1 map { _ => t._2 } }
-  }
+  def decode[A](list: List[(Int, A)]) = list.flatMap { t => 1 to t._1 map { _ => t._2 } }
 
   // P13 (**) Run-length encoding of a list (direct solution).
   def encodeDirect[A](list: List[A]): List[(Int, A)] = encode(list) // TODO
@@ -73,21 +73,22 @@ object Problems {
   }
 
   // P17 (*) Split a list into two parts. i.e. list.splitAt(i)
-  def split[A](i: Int, list: List[A]) =
-    list.zipWithIndex.foldLeft((List[A](), List[A]())) { (acc, e) =>
-        if (e._2 < i) (e._1 :: acc._1, acc._2) else (acc._1, e._1 :: acc._2)
-    } match {
-      case (l1, l2) => (l1.reverse, l2.reverse)
+  def split[A](i: Int, list: List[A]) = {
+    val (l1, l2) = list.zipWithIndex.foldLeft((List[A](), List[A]())) { (acc, e) =>
+      if (e._2 < i) (e._1 :: acc._1, acc._2) else (acc._1, e._1 :: acc._2)
     }
+    (l1.reverse, l2.reverse)
+  }
 
   // P18 (**) Extract a slice from a list. i.e. list.slice(s, e)
   def slice[A](s: Int, e: Int, list: List[A]) = {
-    list.zipWithIndex.filter { t => t._2 >= s && t._2 < e }.map(_._1)
+    list.zipWithIndex.filter { t => t._2 >= s && t._2 < e } map { _._1 }
   }
 
   // P19 (**) Rotate a list N places to the left.
-  def rotate[A](i: Int, list: List[A]) : List[A]= {
-    Nil // TODO
+  def rotate[A](i: Int, list: List[A]): List[A] = {
+    val (h, t) = split(if (i < 0) list.size + i else i, list)
+    t ++ h
   }
 
   // P20 (*) Remove the Kth element from a list.
@@ -103,8 +104,16 @@ object Problems {
     }.reverse
 
   // P22 (*) Create a list containing all integers within a given range.
-  def range(s: Int, e: Int) : List[Int] = {
-    if (s <= e) s :: range(s + 1, e) else Nil
+  def range(s: Int, e: Int): List[Int] = if (s > e) Nil else s :: range(s + 1, e)
+
+  // P23 (**) Extract a given number of randomly selected elements from a list
+  def randomSelect(n: Int, list: List[Int]): List[Int] = {
+    if(n == 0) {
+      Nil
+    } else {
+      val (l, e) = removeAt(Random.nextInt(list.size), list)
+      e :: randomSelect(n - 1, l)
+    }
   }
 
 }

@@ -91,12 +91,12 @@ class ProblemsSpec extends Specification {
         List('d, 'e, 'f, 'g)
     }
 
-//    "rotate a list N places to the left (P19)" in {
-//      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
-//        List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
-//      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
-//        List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
-//    }
+    "rotate a list N places to the left (P19)" in {
+      rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+                List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
+      rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) must_==
+                 List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
+    }
 
     "remove the Kth element from a list (P20)" in {
       removeAt(1, List('a, 'b, 'c, 'd)) must_== (List('a, 'c, 'd),'b)
@@ -108,6 +108,13 @@ class ProblemsSpec extends Specification {
 
     "create a list containing all integers within a given range. (P22)" in {
       range(4, 9) must_== List(4, 5, 6, 7, 8, 9)
+    }
+
+    "extract a given number of randomly selected elements from a list. (P23)" in {
+      randomSelect(3, List(4, 5, 6, 7, 8, 9)).distinct.size must_== 3
+      randomSelect(3, List(4, 5, 6, 7, 8, 9)).forall {
+        List(4, 5, 6, 7, 8, 9) contains _
+      }
     }
 
   }
