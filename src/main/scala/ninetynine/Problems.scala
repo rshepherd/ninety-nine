@@ -1,17 +1,30 @@
 package ninetynine
 
-import scala.util.Random
-
 object Problems {
 
   // P01 (*) Find the last element of a list.
-  def last[A](list: List[A]) = list.last
+  def last[A](l: List[A]): Option[A] = l match {
+    case x :: Nil => Some(x)
+    case x :: xs => last(xs)
+    case _ => None
+  }
 
   // P02 (*) Find the last but one element of a list.
-  def penultimate[A](list: List[A]) = list.init.last
+  def penultimate[A](l: List[A]): Option[A] = l match {
+    case x :: _ :: Nil => Some(x)
+    case x :: xs => penultimate(xs)
+    case _ => None
+  }
 
-  // P03 (*) Find the Kth element of a list.
-  def nth[A](i: Int, list: List[A]) = list.drop(i).head
+  // P03 (*) Find the Nth element of a list.
+  def nth[A](i: Int, list: List[A]): Option[A] = {
+    if(i < list.size)
+      Some(
+        list.zipWithIndex.reduceLeft {
+          (a, b) => if(b._2 == i) b else a
+        }._1)
+     else None
+  }
 
   // P04 (*) Find the number of elements of a list.
   def len[A](list: List[A]) = list.foldLeft(0) { (a, _) => a + 1 }
@@ -107,13 +120,19 @@ object Problems {
   def range(s: Int, e: Int): List[Int] = if (s > e) Nil else s :: range(s + 1, e)
 
   // P23 (**) Extract a given number of randomly selected elements from a list
-  def randomSelect(n: Int, list: List[Int]): List[Int] = {
+  def randomSelect[A](n: Int, list: List[A]): List[A] = {
     if(n == 0) {
       Nil
     } else {
-      val (l, e) = removeAt(Random.nextInt(list.size), list)
+      val (l, e) = removeAt(scala.util.Random.nextInt(list.size), list)
       e :: randomSelect(n - 1, l)
     }
   }
+
+  // P24 (*) Lotto: Draw N different random numbers from the set 1..M
+  def lotto(n: Int, max: Int) = randomSelect(n, range(1, max))
+
+  // P25 (*) Generate a random permutation of the elements of a list.
+  def permute[A](l: List[A]) = randomSelect(l.length, l)
 
 }

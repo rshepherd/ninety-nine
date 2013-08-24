@@ -5,18 +5,18 @@ import org.specs2.mutable._
 
 class ProblemsSpec extends Specification {
 
-  "My solution" should {
+  "Take one down, pass it around.." should {
 
     "find the last element of a list. (P01)" in {
-      last(List(1, 1, 2, 3, 5, 8)) must_== 8
+      last(List(1, 1, 2, 3, 5, 8)) must_== Some(8)
     }
 
     "find the last but one element of a list. (P02)" in {
-      penultimate(List(1, 1, 2, 3, 5, 8)) must_== 5
+      penultimate(List(1, 1, 2, 3, 5, 8)) must_== Some(5)
     }
 
     "find the Kth element of a list. (P03)" in {
-      nth(2, List(1, 1, 2, 3, 5, 8)) must_== 2
+      nth(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
     }
 
     "find the number of elements of a list. (P04)" in {
@@ -112,9 +112,22 @@ class ProblemsSpec extends Specification {
 
     "extract a given number of randomly selected elements from a list. (P23)" in {
       randomSelect(3, List(4, 5, 6, 7, 8, 9)).distinct.size must_== 3
-      randomSelect(3, List(4, 5, 6, 7, 8, 9)).forall {
+      randomSelect(3, List(4, 5, 6, 7, 8, 9)) forall {
         List(4, 5, 6, 7, 8, 9) contains _
       }
+    }
+
+    "draw N different random numbers from the set 1..M (P24)" in {
+      lotto(3, 9).distinct.size must_== 3
+      lotto(3, 9) forall { _ <= 9 }
+      lotto(99, 99) forall { _ <= 99 }
+    }
+
+    "generate a random permutation of the elements of a list. (P25)" in {
+      val l = List(1 ,2, 3, 4, 5)
+      val p = permute(l)
+      p.size must_== 5
+      p forall { l contains _}
     }
 
   }
