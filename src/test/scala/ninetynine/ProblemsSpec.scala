@@ -127,7 +127,7 @@ class ProblemsSpec extends Specification {
       val l = List(1 ,2, 3, 4, 5)
       val p = permute(l)
       p.size must_== 5
-      p forall { l contains _}
+      p forall { l contains _ }
     }
 
   }
