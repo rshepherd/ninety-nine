@@ -15,7 +15,7 @@ class ProblemsSpec extends Specification {
       penultimate(List(1, 1, 2, 3, 5, 8)) must_== Some(5)
     }
 
-    "find the Kth element of a list. (P03)" in {
+    "find the Nth element of a list. (P03)" in {
       nth(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
     }
 

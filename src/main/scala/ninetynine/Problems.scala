@@ -17,20 +17,30 @@ object Problems {
   }
 
   // P03 (*) Find the Nth element of a list.
-  def nth[A](i: Int, list: List[A]): Option[A] = {
-    if(i < list.size)
-      Some(
-        list.zipWithIndex.reduceLeft {
-          (a, b) => if(b._2 == i) b else a
-        }._1)
-     else None
+  def nth[A](i: Int, l: List[A]): Option[A] = l match {
+    case x :: xs if xs.size == l.size - i  - 1 => Some(x)
+    case x :: xs => nth(i - 1, xs)
+    case _ => None
   }
 
   // P04 (*) Find the number of elements of a list.
-  def len[A](list: List[A]) = list.foldLeft(0) { (a, _) => a + 1 }
+  def len[A](l: List[A]): Int = {
+    def length[B](a: Int, l: List[B]): Int = l match {
+      case Nil => 0
+      case x :: Nil => a + 1
+      case x :: xs => length(a + 1, xs)
+    }
+    length(0, l)
+  }
 
   // P05 (*) Reverse a list.
   def rev[A](list: List[A]) = list.foldLeft(List[A]()) { (l, a) => a :: l }
+
+  // P05.5 (*) Reverse a list.
+  def rev2[A](l: List[A]): List[A] = l match {
+    case Nil => Nil
+    case x :: xs => rev2(xs) ::: List(x)
+  }
 
   // P06 (*) Find out whether a list is a palindrome.
   def palindrome[A](list: List[A]) = {
