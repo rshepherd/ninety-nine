@@ -16,7 +16,7 @@ class ProblemsSpec extends Specification {
     }
 
     "find the Nth element of a list. (P03)" in {
-      nth(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
+      elementAt(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
     }
 
     "find the number of elements of a list. (P04)" in {
@@ -128,6 +128,12 @@ class ProblemsSpec extends Specification {
       val p = permute(l)
       p.size must_== 5
       p forall { l contains _ }
+    }
+
+    "determine whether a given integer number is prime. (P31)" in {
+      implicit def primality(l: Int) = P31(l)
+      13.isPrime must beTrue
+      10.isPrime must beFalse
     }
 
   }

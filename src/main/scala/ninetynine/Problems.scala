@@ -17,9 +17,14 @@ object Problems {
   }
 
   // P03 (*) Find the Nth element of a list.
-  def nth[A](i: Int, l: List[A]): Option[A] = l match {
-    case x :: xs if xs.size == l.size - i  - 1 => Some(x)
-    case x :: xs => nth(i - 1, xs)
+  def elementAt[A](i: Int, list: List[A]): Option[A] = {
+    if(i >= list.size) None
+    else Some(list.zipWithIndex.reduceLeft((a, b) => if(b._2 == i) b else a )._1)
+  }
+
+  def elementAtRecursive[A](i: Int, l: List[A]): Option[A] = l match {
+    case x :: xs if xs.size == l.size - i - 1 => Some(x)
+    case x :: xs => elementAt(i - 1, xs)
     case _ => None
   }
 
@@ -36,10 +41,9 @@ object Problems {
   // P05 (*) Reverse a list.
   def rev[A](list: List[A]) = list.foldLeft(List[A]()) { (l, a) => a :: l }
 
-  // P05.5 (*) Reverse a list.
-  def rev2[A](l: List[A]): List[A] = l match {
+  def revRecursive[A](l: List[A]): List[A] = l match {
     case Nil => Nil
-    case x :: xs => rev2(xs) ::: List(x)
+    case x :: xs => revRecursive(xs) ::: List(x)
   }
 
   // P06 (*) Find out whether a list is a palindrome.
@@ -145,4 +149,15 @@ object Problems {
   // P25 (*) Generate a random permutation of the elements of a list.
   def permute[A](l: List[A]) = randomSelect(l.length, l)
 
+  // P31 (**) Determine whether a given integer number is prime.
+  case class P31(i: Int) {
+    def isPrime() = {
+      def isPrime(l: Int, div: Int) : Boolean = {
+        if(div == 1) true
+        else if(l % div == 0) false
+        else isPrime(l, div - 1)
+      }
+      if (i < 2 || i % 2 == 0) false else isPrime(i, i/2)
+    }
+  }
 }
