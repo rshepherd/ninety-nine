@@ -135,9 +135,8 @@ object Problems {
 
   // P23 (**) Extract a given number of randomly selected elements from a list
   def randomSelect[A](n: Int, list: List[A]): List[A] = {
-    if(n == 0) {
-      Nil
-    } else {
+    if(n == 0) Nil
+    else {
       val (l, e) = removeAt(scala.util.Random.nextInt(list.size), list)
       e :: randomSelect(n - 1, l)
     }
@@ -150,8 +149,8 @@ object Problems {
   def permute[A](l: List[A]) = randomSelect(l.length, l)
 
   // P31 (**) Determine whether a given integer number is prime.
-  case class P31(i: Int) {
-    def isPrime() = {
+  case class PrimeTest(i: Int) {
+    def isPrime = {
       def isPrime(l: Int, div: Int) : Boolean = {
         if(div == 1) true
         else if(l % div == 0) false
@@ -159,5 +158,13 @@ object Problems {
       }
       if (i < 2 || i % 2 == 0) false else isPrime(i, i/2)
     }
+  }
+
+  // P32 (**) Determine the greatest common divisor of two positive integer numbers.
+  def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+
+  // P33 (*) Determine whether two positive integer numbers are coprime.
+  case class CoprimeTest(a: Int) {
+    def isCoprime(b: Int) = gcd(a, b) == 1
   }
 }

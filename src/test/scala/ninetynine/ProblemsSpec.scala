@@ -131,9 +131,20 @@ class ProblemsSpec extends Specification {
     }
 
     "determine whether a given integer number is prime. (P31)" in {
-      implicit def primality(l: Int) = P31(l)
+      implicit def primality(i: Int) = PrimeTest(i)
       13.isPrime must beTrue
       10.isPrime must beFalse
+    }
+
+    "determine the greatest common divisor of two positive integer numbers. (P32)" in {
+      gcd(36, 63) must_== 9
+      gcd(7, 5) must_== 1
+    }
+
+    "determine whether two positive integer numbers are coprime. (P33)" in {
+      implicit def coprimality(i: Int) = CoprimeTest(i)
+      35.isCoprime(64) must beTrue
+      10.isCoprime(100) must beFalse
     }
 
   }
