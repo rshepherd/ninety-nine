@@ -49,7 +49,7 @@ object Problems {
   // P06 (*) Find out whether a list is a palindrome.
   def palindrome[A](list: List[A]) = {
     def compare(l1: List[A], l2: List[A]): Boolean = {
-      if (l1.isEmpty) true
+      if (l1.isEmpty && l2.isEmpty) true
       else if (l1.head != l2.head) false
       else compare(l1.tail, l2.tail)
     }
