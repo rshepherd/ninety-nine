@@ -24,7 +24,7 @@ object Problems {
 
   def elementAtRecursive[A](i: Int, l: List[A]): Option[A] = l match {
     case x :: xs if xs.size == l.size - i - 1 => Some(x)
-    case x :: xs => elementAt(i - 1, xs)
+    case x :: xs => elementAtRecursive(i - 1, xs)
     case _ => None
   }
 
