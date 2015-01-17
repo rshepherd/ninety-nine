@@ -1,9 +1,9 @@
 package ninetynine
 
-import Problems._
 import org.specs2.mutable._
 
 class ProblemsSpec extends Specification {
+  import Problems._
 
   "Take one down, pass it around.." should {
 
@@ -142,9 +142,13 @@ class ProblemsSpec extends Specification {
     }
 
     "determine whether two positive integer numbers are coprime. (P33)" in {
-      implicit def coprimality(i: Int) = CoprimeTest(i)
       35.isCoprime(64) must beTrue
       10.isCoprime(100) must beFalse
+    }
+
+    "calculate the totient of some integer. (P34)" in {
+      10.φ must_== 4
+      9.φ must_== 6
     }
 
   }

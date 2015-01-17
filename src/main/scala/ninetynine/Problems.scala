@@ -164,7 +164,16 @@ object Problems {
   def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
   // P33 (*) Determine whether two positive integer numbers are coprime.
+  implicit def _coprime(i: Int) = CoprimeTest(i)
   case class CoprimeTest(a: Int) {
     def isCoprime(b: Int) = gcd(a, b) == 1
+  }
+
+  // P34 (**) Calculate Euler's totient function
+  implicit def _totient(i: Int) = Totient(i)
+  case class Totient(a: Int) {
+    def φ = (1 to a).count { i =>
+      i isCoprime a
+    }
   }
 }
