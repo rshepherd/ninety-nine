@@ -149,14 +149,15 @@ object Problems {
   def permute[A](l: List[A]) = randomSelect(l.length, l)
 
   // P31 (**) Determine whether a given integer number is prime.
-  case class PrimeTest(i: Int) {
+  implicit def _prime(i: Int) = Prime(i)
+  case class Prime(i: Int) {
     def isPrime = {
-      def isPrime(l: Int, div: Int) : Boolean = {
-        if(div == 1) true
-        else if(l % div == 0) false
-        else isPrime(l, div - 1)
+      def isPrime(l: Int, mod: Int) : Boolean = {
+        if(mod == 1) true
+        else if(l % mod == 0) false
+        else isPrime(l, mod - 1)
       }
-      if (i < 2 || i % 2 == 0) false else isPrime(i, i/2)
+      if (i < 2 || (i > 2 && i % 2 == 0)) false else isPrime(i, i/2)
     }
   }
 
@@ -176,4 +177,21 @@ object Problems {
       i isCoprime a
     }
   }
+
+  // P35 (**) Determine the prime factors of a given positive integer.
+  implicit def _primeFactors(i: Int) = PrimeFactors(i)
+  case class PrimeFactors(i: Int) {
+    def primeFactors = {
+      def factorize(i: Int, f: Int = 1, factors: List[Int] = Nil): List[Int] = {
+        if (f > i)
+          factors
+        else if (i % f == 0 && f.isPrime)
+          factorize(i / f, f, f :: factors)
+        else
+          factorize(i, f + 1, factors)
+      }
+      factorize(i).sorted
+    }
+  }
+
 }

@@ -131,7 +131,6 @@ class ProblemsSpec extends Specification {
     }
 
     "determine whether a given integer number is prime. (P31)" in {
-      implicit def primality(i: Int) = PrimeTest(i)
       13.isPrime must beTrue
       10.isPrime must beFalse
     }
@@ -147,8 +146,16 @@ class ProblemsSpec extends Specification {
     }
 
     "calculate the totient of some integer. (P34)" in {
+      0.φ must_== 0
       10.φ must_== 4
       9.φ must_== 6
+    }
+
+    "calculate te prime factors of some integer. (P35)" in {
+      0.primeFactors must_== Nil
+      17.primeFactors must_== List(17)
+      90.primeFactors must_== List(2, 3, 3, 5)
+      315.primeFactors must_== List(3, 3, 5, 7)
     }
 
   }
