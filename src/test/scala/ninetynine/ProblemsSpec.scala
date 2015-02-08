@@ -165,16 +165,21 @@ class ProblemsSpec extends Specification {
       l.contains((1,7))
     }
 
-    "calculate the totient of some integer. (P37)" in {
-      true must beTrue
-    }
-
-    "compare the two methods of calculating Euler's totient function. (P38)" in {
-      true must beTrue
-    }
+//    "calculate the totient of some integer. (P37)" in {
+//
+//    }
+//
+//    "compare the two methods of calculating Euler's totient function. (P38)" in {
+//    }
 
     "extract prime numbers from a range. (P39)" in {
+      listPrimesInRange(1 to 1) must_== Nil
+      listPrimesInRange(1 to 2) must_== List(2)
       listPrimesInRange(7 to 31) must_== List(7, 11, 13, 17, 19, 23, 29, 31)
+    }
+
+    "calculate Goldbach conjecture for some integer. (P40)" in {
+      28.goldbach must_== (5, 23)
     }
 
   }

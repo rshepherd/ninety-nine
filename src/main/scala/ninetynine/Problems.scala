@@ -148,7 +148,8 @@ object Problems {
   // P25 (*) Generate a random permutation of the elements of a list.
   def permute[A](l: List[A]) = randomSelect(l.length, l)
 
-  // P31 (**) Determine whether a given integer number is prime.
+  // P31 (**) (Very naive way to) Determine whether a given integer number is prime.
+  // TODO - implement http://en.literateprograms.org/Sieve_of_Eratosthenes_%28Scala%29
   implicit def _prime(i: Int) = Prime(i)
   case class Prime(i: Int) {
     def isPrime = {
@@ -157,7 +158,7 @@ object Problems {
         else if(l % mod == 0) false
         else isPrime(l, mod - 1)
       }
-      if (i < 2 || (i > 2 && i % 2 == 0)) false else isPrime(i, i/2)
+      if (i < 2 || (i > 2 && i % 2 == 0)) false else isPrime(i, Math.sqrt(i).toInt)
     }
   }
 
@@ -203,5 +204,13 @@ object Problems {
 
   // P39 (*) Extract prime numbers from a range.
   def listPrimesInRange(r: Range) = r.filter(_.isPrime)
+
+  // P40 (**) Goldbach conjecture.
+  implicit def _goldbach(i: Int) = Goldbach(i)
+  case class Goldbach(i: Int) {
+    def goldbach = listPrimesInRange(2 to i).foldLeft((0, 0)) { (x, y) =>
+      if((i - y).isPrime) (i - y, y) else x
+    }
+  }
 
 }
