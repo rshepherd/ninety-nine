@@ -5,7 +5,7 @@ import org.specs2.mutable._
 class ProblemsSpec extends Specification {
   import Problems._
 
-  "Take one down, pass it around.." should {
+  "Take one down, pass it around... " should {
 
     "find the last element of a list. (P01)" in {
       last(List(1, 1, 2, 3, 5, 8)) must_== Some(8)
@@ -151,11 +151,30 @@ class ProblemsSpec extends Specification {
       9.φ must_== 6
     }
 
-    "calculate te prime factors of some integer. (P35)" in {
+    "determine the prime factors of some integer. (P35)" in {
       0.primeFactors must_== Nil
       17.primeFactors must_== List(17)
       90.primeFactors must_== List(2, 3, 3, 5)
       315.primeFactors must_== List(3, 3, 5, 7)
+    }
+
+    "determine the prime factors of some integer with multiples.  (P36)" in {
+      val l = primeFactorMultiplicity(315)
+      l.contains((2,3))
+      l.contains((1,5))
+      l.contains((1,7))
+    }
+
+    "calculate the totient of some integer. (P37)" in {
+      true must beTrue
+    }
+
+    "compare the two methods of calculating Euler's totient function. (P38)" in {
+      true must beTrue
+    }
+
+    "extract prime numbers from a range. (P39)" in {
+      listPrimesInRange(7 to 31) must_== List(7, 11, 13, 17, 19, 23, 29, 31)
     }
 
   }

@@ -165,8 +165,8 @@ object Problems {
   def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
   // P33 (*) Determine whether two positive integer numbers are coprime.
-  implicit def _coprime(i: Int) = CoprimeTest(i)
-  case class CoprimeTest(a: Int) {
+  implicit def _coprime(i: Int) = Coprime(i)
+  case class Coprime(a: Int) {
     def isCoprime(b: Int) = gcd(a, b) == 1
   }
 
@@ -193,5 +193,15 @@ object Problems {
       factorize(i).sorted
     }
   }
+
+  // P36 (**) Determine the prime factors of a given positive integer (2).
+  def primeFactorMultiplicity(i : Int) = encode(i.primeFactors)
+
+  // P37 (**) Calculate Euler's totient function phi(m) (improved).
+
+  // P38 (*) Compare the two methods of calculating Euler's totient function.
+
+  // P39 (*) Extract prime numbers from a range.
+  def listPrimesInRange(r: Range) = r.filter(_.isPrime)
 
 }
