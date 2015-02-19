@@ -17,6 +17,7 @@ class ProblemsSpec extends Specification {
 
     "find the Nth element of a list. (P03)" in {
       elementAt(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
+      elementAtRecursive(2, List(1, 1, 2, 3, 5, 8)) must_== Some(2)
     }
 
     "find the number of elements of a list. (P04)" in {
@@ -153,8 +154,12 @@ class ProblemsSpec extends Specification {
 
     "determine the prime factors of some integer. (P35)" in {
       0.primeFactors must_== Nil
+      2.primeFactors must_== List(2)
+      4.primeFactors must_== List(2, 2)
+      12.primeFactors must_== List(2, 2, 3)
       17.primeFactors must_== List(17)
       90.primeFactors must_== List(2, 3, 3, 5)
+      150.primeFactors must_== List(2, 3, 5, 5)
       315.primeFactors must_== List(3, 3, 5, 7)
     }
 
@@ -166,7 +171,6 @@ class ProblemsSpec extends Specification {
     }
 
 //    "calculate the totient of some integer. (P37)" in {
-//
 //    }
 //
 //    "compare the two methods of calculating Euler's totient function. (P38)" in {
