@@ -125,7 +125,7 @@ object Problems {
   }
 
   // P21 (*) Insert an element at a given position into a list.
-  def insertAt[A](x: A, i: Int, list: List[A]) =
+  def insertAt[A](x: A, i: Int, list: List[A]): List[A] =
     list.zipWithIndex.foldLeft(List[A]()) { (acc, e) =>
       if(e._2 == i) e._1 :: x :: acc else e._1 :: acc
     }.reverse
@@ -143,16 +143,22 @@ object Problems {
   }
 
   // P24 (*) Lotto: Draw N different random numbers from the set 1..M
-  def lotto(n: Int, max: Int) = randomSelect(n, range(1, max))
+  def lotto(n: Int, max: Int): List[Int] = randomSelect(n, range(1, max))
 
   // P25 (*) Generate a random permutation of the elements of a list.
-  def permute[A](l: List[A]) = randomSelect(l.length, l)
+  def permutation[A](l: List[A]): List[A] = randomSelect(l.length, l)
+
+  // P26 (**) Generate the combinations of K distinct objects chosen from the N elements of a list.
+  def combinations[A](n: Int, list: List[A]): List[List[A]] = list match {
+    case Nil => Nil
+    case _ if n == 1 => list.map(List(_))
+    case x :: xs => combinations(n - 1, xs).map(x :: _) ++ combinations(n, xs)
+  }
 
   // P31 (**) (Very naive way to) Determine whether a given integer number is prime.
-  // TODO - implement http://en.literateprograms.org/Sieve_of_Eratosthenes_%28Scala%29
-  implicit def _prime(i: Int) = Prime(i)
+  implicit def _prime(i: Int): Prime = Prime(i)
   case class Prime(i: Int) {
-    def isPrime = {
+    def isPrime: Boolean = {
       def isPrime(l: Int, mod: Int) : Boolean = {
         if(mod == 1) true
         else if(l % mod == 0) false
@@ -166,13 +172,13 @@ object Problems {
   def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 
   // P33 (*) Determine whether two positive integer numbers are coprime.
-  implicit def _coprime(i: Int) = Coprime(i)
+  implicit def _coprime(i: Int): Coprime = Coprime(i)
   case class Coprime(a: Int) {
-    def isCoprime(b: Int) = gcd(a, b) == 1
+    def isCoprime(b: Int): Boolean = gcd(a, b) == 1
   }
 
   // P34 (**) Calculate Euler's totient function
-  implicit def _totient(i: Int) = Totient(i)
+  implicit def _totient(i: Int): Totient = Totient(i)
   case class Totient(a: Int) {
     def φ = (1 to a).count { i =>
       i isCoprime a
@@ -180,9 +186,9 @@ object Problems {
   }
 
   // P35 (**) Determine the prime factors of a given positive integer.
-  implicit def _primeFactors(i: Int) = PrimeFactors(i)
+  implicit def _primeFactors(i: Int): PrimeFactors = PrimeFactors(i)
   case class PrimeFactors(i: Int) {
-    def primeFactors = {
+    def primeFactors: List[Int] = {
       def factorize(i: Int, f: Int = 1, factors: List[Int] = Nil): List[Int] = {
         if (f > i)
           factors
@@ -196,17 +202,13 @@ object Problems {
   }
 
   // P36 (**) Determine the prime factors of a given positive integer (2).
-  def primeFactorMultiplicity(i : Int) = encode(i.primeFactors)
-
-  // P37 (**) Calculate Euler's totient function phi(m) (improved).
-
-  // P38 (*) Compare the two methods of calculating Euler's totient function.
+  def primeFactorMultiplicity(i : Int): List[(Int, Int)] = encode(i.primeFactors)
 
   // P39 (*) Extract prime numbers from a range.
-  def listPrimesInRange(r: Range) = r.filter(_.isPrime)
+  def listPrimesInRange(r: Range): IndexedSeq[Int] = r.filter(_.isPrime)
 
   // P40 (**) Goldbach conjecture.
-  implicit def _goldbach(i: Int) = Goldbach(i)
+  implicit def _goldbach(i: Int): Goldbach = Goldbach(i)
   case class Goldbach(i: Int) {
     def goldbach = listPrimesInRange(2 to i).foldLeft((0, 0)) { (x, y) =>
       if((i - y).isPrime) (i - y, y) else x

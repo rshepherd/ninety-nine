@@ -126,9 +126,19 @@ class ProblemsSpec extends Specification {
 
     "generate a random permutation of the elements of a list. (P25)" in {
       val l = List(1 ,2, 3, 4, 5)
-      val p = permute(l)
+      val p = permutation(l)
       p.size must_== 5
       p forall { l contains _ }
+    }
+
+    "generate the combinations of K distinct objects chosen from the N elements of a list. (P26)" in {
+      val l = combinations(2, List('a', 'b', 'c', 'd'))
+      l.contains(List('a', 'b')) must beTrue
+      l.contains(List('a', 'c')) must beTrue
+      l.contains(List('a', 'd')) must beTrue
+      l.contains(List('b', 'c')) must beTrue
+      l.contains(List('b', 'd')) must beTrue
+      l.contains(List('c', 'd')) must beTrue
     }
 
     "determine whether a given integer number is prime. (P31)" in {
@@ -169,12 +179,6 @@ class ProblemsSpec extends Specification {
       l.contains((1,5))
       l.contains((1,7))
     }
-
-//    "calculate the totient of some integer. (P37)" in {
-//    }
-//
-//    "compare the two methods of calculating Euler's totient function. (P38)" in {
-//    }
 
     "extract prime numbers from a range. (P39)" in {
       listPrimesInRange(1 to 1) must_== Nil
